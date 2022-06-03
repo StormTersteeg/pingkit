@@ -41,7 +41,7 @@ function fetchSites() {
     }
 
     string_html += `
-      <div id="request-${index}" class="row text-white">
+      <div id="request-${index}" class="row text-white mb-1">
         <div class="col-1"><colourblock style="background:${site.colour}"></colourblock></div>
         <div class="col-3">${site.url}</div>
         <div class="col-1">${result.ping}ms</div>
@@ -49,7 +49,7 @@ function fetchSites() {
         <div class="col-1">${result.changes}</div>
         <div class="col-1">${result.size}</div>
         <div class="col-1"><span class="text-${status_colour}">${result.status}</div>
-        <div class="col-1"></div>
+        <div class="col-1"><span class="material-icons pointer text-white-50" onclick="removeSite(${index})">highlight_off</span></div>
       </div>
     `
     index++
@@ -69,6 +69,11 @@ function addSite() {
 
   document.getElementById("new-site-input").value = ""
   document.getElementById("new-site-colour-input").value = ""
+}
+
+function removeSite(index) {
+  sites.splice(index, 1)
+  fetchSites()
 }
 
 function timerTick() {
