@@ -16,3 +16,16 @@ colourblock {
   height:20px;
   width:20px
 }
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: grey !important;
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: grey !important;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+  color: grey !important;
+}

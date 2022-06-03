@@ -1,2 +1,6 @@
 var current_page = "main"
-var urls = ["https://dontdalon.com/", "https://stormtersteeg.com/"]
+var sites = [
+  {url: "https://dontdalon.com/", colour: "green"},
+  {url: "https://stormtersteeg.com/", colour: "blue"},
+]
+var timer_speed = 60
