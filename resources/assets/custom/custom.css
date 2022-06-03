@@ -29,3 +29,12 @@ colourblock {
 ::-ms-input-placeholder { /* Microsoft Edge */
   color: grey !important;
 }
+
+@keyframes rotate {
+  0% {transform:rotate(0deg)}
+  100% {transform:rotate(360deg)}
+}
+
+.rotate {
+  animation: 5s rotate linear infinite
+}

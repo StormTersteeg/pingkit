@@ -19,6 +19,7 @@ function fetchSite(site) {
   return {
     ping: 30,
     avg_ping: 35,
+    changes: 0,
     size: 2581,
     status: 200
   }
@@ -42,10 +43,11 @@ function fetchSites() {
     string_html += `
       <div id="request-${index}" class="row text-white">
         <div class="col-1"><colourblock style="background:${site.colour}"></colourblock></div>
-        <div class="col-4">${site.url}</div>
+        <div class="col-3">${site.url}</div>
         <div class="col-1">${result.ping}ms</div>
         <div class="col-2">${result.avg_ping}ms</div>
-        <div class="col-2">${result.size}</div>
+        <div class="col-1">${result.changes}</div>
+        <div class="col-1">${result.size}</div>
         <div class="col-1"><span class="text-${status_colour}">${result.status}</div>
         <div class="col-1"></div>
       </div>
@@ -62,9 +64,30 @@ function addSite() {
     colour: new_site_colour
   })
   fetchSites()
-  
+
   $('#addSiteModal').modal('hide')
 
   document.getElementById("new-site-input").value = ""
   document.getElementById("new-site-colour-input").value = ""
+}
+
+function timerTick() {
+  fetchSites()
+}
+
+function toggleTimer() {
+  interval = !interval
+  
+  if (interval) {
+    document.getElementById("timer-button").innerHTML = '<span class="material-icons rotate">autorenew</span>'
+    document.getElementById("timer-button").classList.remove("border-info")
+    document.getElementById("timer-button").classList.add("border-success")
+    timerTick()
+    myInterval = setInterval(timerTick, timer_speed)
+  } else {
+    document.getElementById("timer-button").innerHTML = '<span class="material-icons">schedule</span>'
+    document.getElementById("timer-button").classList.add("border-info")
+    document.getElementById("timer-button").classList.remove("border-success")
+    clearInterval(myInterval)
+  }
 }
