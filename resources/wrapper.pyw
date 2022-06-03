@@ -1,4 +1,4 @@
-import webview, os, sys
+import webview, os, sys, requests
 
 def on_closed():
   pass
@@ -13,9 +13,26 @@ def on_loaded():
   pass
 
 class Api:
+  def __init__(self):
+    self.sites = []
+
   def openChild(self, url):
     window.hide()
     child = webview.create_window(url, url)
+
+  def fetchSite(self, url):
+    post = requests.post(url)
+
+    ping = int(post.elapsed.total_seconds()*1000)
+    size = len(post.text)
+    status = post.status_code
+
+    response = {
+      'ping': ping,
+      'size': size,
+      'status': status
+    }
+    return response
 
   def minimize(self):
     window.minimize()

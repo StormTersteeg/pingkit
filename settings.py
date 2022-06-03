@@ -1,6 +1,6 @@
 # App Settings ====================================================================================================
 app_name = "Glide"                      # App name, displayed in the title bar
-app_proportions = [800, 450]            # Width, Height
+app_proportions = [1200, 675]            # Width, Height
 app_resizable = True                    # Allow the window to be resized
 app_confirm_close = False               # Quit confirmation dialog prompt
 app_allow_inspect = False               # To open up debugging console, right click on an element and select Inspect.
