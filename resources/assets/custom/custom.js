@@ -56,4 +56,15 @@ function fetchSites() {
   document.getElementById("request-list").innerHTML = string_html
 }
 
-fetchSites()
+function addSite() {
+  sites.push({
+    url: new_site,
+    colour: new_site_colour
+  })
+  fetchSites()
+  
+  $('#addSiteModal').modal('hide')
+
+  document.getElementById("new-site-input").value = ""
+  document.getElementById("new-site-colour-input").value = ""
+}

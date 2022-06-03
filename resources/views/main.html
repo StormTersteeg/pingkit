@@ -7,16 +7,18 @@
           <input class="form-control border border-info text-white pl-2" placeholder="interval (seconds)" type="number" value="60" onchange="timer_speed = this.value">
         </div>
         <div class="col-9">
-          <button id="timer-button" onclick="toggleTimer()" class="btn border border-info text-white float-right">
+          <span id="timer-button" onclick="toggleTimer()" class="btn border border-info text-white float-right"
+          data-toggle="tooltip" data-placement="right" title="start fetching">
             <span class="material-icons">schedule</span>
-          </button>
-          <button onclick="addSite()" class="btn border border-success text-white float-right mr-3">
+          </span>
+          <span onclick="$('#addSiteModal').modal('show')" class="btn border border-success text-white float-right mr-3"
+          data-toggle="tooltip" data-placement="left" title="add site">
             <span class="material-icons">add</span>
-          </button>
+          </span>
         </div>
       </div>
 
-      <div class="row text-light">
+      <div class="row text-white-50">
         <div class="col-1"></div>
         <div class="col-4">url</div>
         <div class="col-1">ping</div>

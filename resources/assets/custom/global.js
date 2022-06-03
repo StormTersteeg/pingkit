@@ -1,6 +1,5 @@
 var current_page = "main"
-var sites = [
-  {url: "https://dontdalon.com/", colour: "green"},
-  {url: "https://stormtersteeg.com/", colour: "blue"},
-]
+var sites = []
 var timer_speed = 60
+var new_site = ""
+var new_site_colour = ""
