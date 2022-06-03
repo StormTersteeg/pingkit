@@ -20,18 +20,22 @@ class Api:
     window.hide()
     child = webview.create_window(url, url)
 
-  def fetchSite(self, url):
-    post = requests.post(url)
+  def fetchSites(self, sites):
+    response = []
 
-    ping = int(post.elapsed.total_seconds()*1000)
-    size = len(post.text)
-    status = post.status_code
+    for site in sites:
+      post = requests.post(site["url"])
 
-    response = {
-      'ping': ping,
-      'size': size,
-      'status': status
-    }
+      ping = int(post.elapsed.total_seconds()*1000)
+      size = len(post.text)
+      status = post.status_code
+
+      response.append({
+        'ping': ping,
+        'size': size,
+        'status': status
+      })
+
     return response
 
   def minimize(self):

@@ -16,14 +16,14 @@ function navigate(page) {
 }
 
 function fetchSites() {
-  document.getElementById("request-list").innerHTML = ""
   var index = 0
 
-  sites.forEach(site => {
-    pywebview.api.fetchSite(site.url).then(function(response) {
+  pywebview.api.fetchSites(sites).then(function(response) {
+    document.getElementById("request-list").innerHTML = ""
+    response.forEach(site => {
       var status_colour = ""
-  
-      switch(response.status) {
+
+      switch(site.status) {
         case "200": status_colour = "success"; break
         case "201": status_colour = "success"; break
         case "400": status_colour = "danger"; break
@@ -32,19 +32,19 @@ function fetchSites() {
   
       document.getElementById("request-list").innerHTML += `
         <div id="request-${index}" class="row text-white mb-1">
-          <div class="col-1"><colourblock style="background:${site.colour}"></colourblock></div>
-          <div class="col-3">${site.url.replace('https://','').replace('http://', '').replace('www.', '')}</div>
-          <div class="col-1">${response.ping}ms</div>
+          <div class="col-1"><colourblock style="background:${sites[index].colour}"></colourblock></div>
+          <div class="col-3">${sites[index].url.replace('https://','').replace('http://', '').replace('www.', '')}</div>
+          <div class="col-1">${site.ping}ms</div>
           <div class="col-2">0ms</div>
           <div class="col-1">0</div>
-          <div class="col-1">${response.size}</div>
-          <div class="col-1"><span class="text-${status_colour}">${response.status}</div>
+          <div class="col-1">${site.size}</div>
+          <div class="col-1"><span class="text-${status_colour}">${site.status}</div>
           <div class="col-1"><span class="material-icons pointer text-white-50" onclick="removeSite(${index})">highlight_off</span></div>
         </div>
       `
       index++
-    })
-  });
+    });
+  })
 }
 
 function addSite() {
