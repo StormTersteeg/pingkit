@@ -1,5 +1,6 @@
-# pingkit
-Pingkit can keep track of website ping, response size and more. No serverside software required.
+# PingKit
+PingKit can keep track of website ping, response size and more. No serverside software required.
+Programmed with [Glide](https://github.com/StormTersteeg/Python-Glide-Framework).
 
 ![image](https://user-images.githubusercontent.com/42808385/171974991-d79e89df-f7c8-4102-b08c-92a25dc00e71.png)
 
