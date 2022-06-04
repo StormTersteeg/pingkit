@@ -1,64 +1,59 @@
 <div id="glide-page-main" class="glide-page">
-  <div class="d-flex justify-content-start align-items-start flex-wrap h-100">
       
-    <div class="container mt-5">
-      <div class="row">
-        <div class="col">
-          <canvas id="sizeChart" width="400" height="100"></canvas>
-          <script>
-            const ctxsizeChart = document.getElementById('sizeChart');
-            var data = {
-              labels: [60,59,58,57,56,55,54,53,52,51,50,49,48,47,46,45,44,43,42,41,40,39,38,37,36,35,34,33,32,31,30,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,'now'],
-              datasets: []
-            }
-            const sizeChart = new Chart(ctxsizeChart, {
-              type: 'line',
-              data: data,
-              options: {
-                scales: {
-                  y: {
-                    beginAtZero: true
-                  }
+  <div class="container">
+    <div class="row mt-5">
+      <div class="col">
+        <canvas id="sizeChart" width="400" height="140"></canvas>
+        <script>
+          const ctxsizeChart = document.getElementById('sizeChart');
+          var data = {
+            labels: [60,59,58,57,56,55,54,53,52,51,50,49,48,47,46,45,44,43,42,41,40,39,38,37,36,35,34,33,32,31,30,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,'now'],
+            datasets: []
+          }
+          const sizeChart = new Chart(ctxsizeChart, {
+            type: 'line',
+            data: data,
+            options: {
+              scales: {
+                y: {
+                  beginAtZero: true
                 }
               }
-            });
-          </script>
-        </div>
+            }
+          });
+        </script>
       </div>
     </div>
 
-
-    <div class="container">
-      <div class="row mb-5 text-light">
-        <div class="col-3 pr-0">
-          <input class="form-control border border-info text-white pl-2" placeholder="interval (seconds)" type="number" value="60" onchange="timer_speed = this.value">
-        </div>
-        <div class="col-9">
-          <span id="timer-button" onclick="toggleTimer()" class="btn border border-info text-white float-right"
-          data-toggle="tooltip" data-placement="right" title="start fetching">
-            <span class="material-icons">schedule</span>
-          </span>
-          <span onclick="$('#addSiteModal').modal('show')" class="btn border border-success text-white float-right mr-3"
-          data-toggle="tooltip" data-placement="left" title="add site">
-            <span class="material-icons">add</span>
-          </span>
-        </div>
+    <div class="row my-5 text-light">
+      <div class="col-3 pr-0">
+        <input class="form-control border border-info text-white pl-2" placeholder="interval (seconds)" type="number" value="60" onchange="timer_speed = this.value">
       </div>
-
-      <div class="row text-white-50 mb-1">
-        <div class="col-1"></div>
-        <div class="col-3">url</div>
-        <div class="col-1">ping</div>
-        <div class="col-2">avg ping</div>
-        <div class="col-1">changes</div>
-        <div class="col-1">size</div>
-        <div class="col-1">status</div>
-        <div class="col-1"></div>
+      <div class="col-9">
+        <span id="timer-button" onclick="toggleTimer()" class="btn border border-info text-white float-right"
+        data-toggle="tooltip" data-placement="right" title="start fetching">
+          <span class="material-icons">schedule</span>
+        </span>
+        <span onclick="$('#addSiteModal').modal('show')" class="btn border border-success text-white float-right mr-3"
+        data-toggle="tooltip" data-placement="left" title="add site">
+          <span class="material-icons">add</span>
+        </span>
       </div>
-
-      <div id="request-list"></div>
-      <br><br><br><br>
     </div>
 
+    <div class="row text-white-50 mb-1">
+      <div class="col-1"></div>
+      <div class="col-3">url</div>
+      <div class="col-1">ping</div>
+      <div class="col-2">avg ping</div>
+      <div class="col-1">changes</div>
+      <div class="col-1">size</div>
+      <div class="col-1">status</div>
+      <div class="col-1"></div>
+    </div>
+
+    <div id="request-list"></div>
+    <br><br><br><br>
   </div>
+
 </div>

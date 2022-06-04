@@ -16,7 +16,7 @@ function navigate(page) {
 }
 
 function updateChart(index) {
-  data.datasets[index].data = sites[index].size_data
+  data.datasets[index].data = sites[index].size_data.slice(-60)
 }
 
 function fetchSites() {
@@ -86,6 +86,7 @@ function addSite() {
 function removeSite(el, index) {
   el.parentElement.parentElement.remove()
   sites.splice(index, 1)
+  data.datasets.splice(index, 1)
   fetchSites()
 }
 
