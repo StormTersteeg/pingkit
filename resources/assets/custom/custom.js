@@ -36,7 +36,7 @@ function fetchSites() {
       var average_ping = parseInt(sites[index].ping_data.reduce((t, i) => t + i, 0) / sites[index].ping_data.length)
       if (sites[index].last_size!=site.size) {
         sites[index].changes++
-        if (notifications) {
+        if (notifications && sites[index].last_size!=-1) {
           pywebview.api.doNotification(`${new_site.replace('https://','').replace('http://', '').replace('www.', '').split('/')[0]} got updated`)
         }
       }

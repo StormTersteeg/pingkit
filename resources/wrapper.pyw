@@ -42,12 +42,12 @@ class Api:
     return response
 
   def doNotification(self, message):
-    toaster.show_toast("pingkit",message)
+    toaster.show_toast("pingkit",message,icon_path='')
 
   def toggleNotifications(self):
     self.notifications = not self.notifications
     message = "on" if (self.notifications) else "off"
-    toaster.show_toast("pingkit",f"notifications: {message}")
+    toaster.show_toast("pingkit",f"notifications: {message}",icon_path='')
 
   def minimize(self):
     window.minimize()
