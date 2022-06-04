@@ -1,5 +1,5 @@
 # App Settings ====================================================================================================
-app_name = "Glide"                      # App name, displayed in the title bar
+app_name = "pingkit"                      # App name, displayed in the title bar
 app_proportions = [1200, 700]            # Width, Height
 app_resizable = True                    # Allow the window to be resized
 app_confirm_close = False               # Quit confirmation dialog prompt
