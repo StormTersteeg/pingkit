@@ -18,6 +18,8 @@ resources = [                           # Resources to be included
   "resources/assets/roboto/roboto.min.css",
   "resources/assets/material-icons/material-icons.min.css",
   "resources/assets/material-4.1.1/material.min.css",
+  "resources/assets/chart.js-v2.9.3/chart.min.css",
+  "resources/assets/chart.js-v2.9.3/chart.bundle.min.js",
   "resources/assets/custom/custom.css",
   "resources/title-bar.html",
 

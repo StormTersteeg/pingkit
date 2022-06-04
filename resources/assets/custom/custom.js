@@ -15,6 +15,10 @@ function navigate(page) {
   current_page = page
 }
 
+function updateChart(index) {
+  data.datasets[index].data = sites[index].size_data
+}
+
 function fetchSites() {
   var index = 0
 
@@ -28,12 +32,15 @@ function fetchSites() {
       if (site.status>=500) {status_colour = "warning"}
 
       sites[index].ping_data.push(site.ping)
+      sites[index].size_data.push(site.size)
       var average_ping = parseInt(sites[index].ping_data.reduce((t, i) => t + i, 0) / sites[index].ping_data.length)
       if (sites[index].last_size!=site.size) {
         sites[index].changes++
       }
       sites[index].last_size = site.size
-  
+
+      updateChart(index)
+
       document.getElementById("request-list").innerHTML += `
         <div id="request-${index}" class="row text-white mb-1">
           <div class="col-1"><colourblock style="background:${sites[index].colour}"></colourblock></div>
@@ -48,6 +55,7 @@ function fetchSites() {
       `
       index++
     });
+    sizeChart.update()
   })
 }
 
@@ -56,10 +64,18 @@ function addSite() {
     url: new_site,
     colour: new_site_colour,
     ping_data: [],
+    size_data: [],
     last_size: -1,
     changes: -1
   })
   fetchSites()
+
+  data.datasets.push({
+    label: new_site.replace('https://','').replace('http://', '').replace('www.', ''),
+    data: [],
+    borderColor: [new_site_colour],
+  })
+  sizeChart.update()
 
   $('#addSiteModal').modal('hide')
 
