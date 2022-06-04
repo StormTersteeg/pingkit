@@ -24,7 +24,8 @@ class Api:
     response = []
 
     for site in sites:
-      post = requests.post(site["url"])
+      headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
+      post = requests.post(site["url"], headers=headers)
 
       ping = int(post.elapsed.total_seconds()*1000)
       size = len(post.text)
