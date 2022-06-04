@@ -1,4 +1,5 @@
 import webview, os, sys, requests
+from win10toast import ToastNotifier
 
 def on_closed():
   pass
@@ -15,6 +16,7 @@ def on_loaded():
 class Api:
   def __init__(self):
     self.sites = []
+    self.notifications = False
 
   def openChild(self, url):
     window.hide()
@@ -39,6 +41,14 @@ class Api:
 
     return response
 
+  def doNotification(self, message):
+    toaster.show_toast("pingkit",message)
+
+  def toggleNotifications(self):
+    self.notifications = not self.notifications
+    message = "on" if (self.notifications) else "off"
+    toaster.show_toast("pingkit",f"notifications: {message}")
+
   def minimize(self):
     window.minimize()
 
@@ -56,6 +66,7 @@ class Api:
 
 if __name__ == '__main__':
   api = Api()
+  toaster = ToastNotifier()
   window = webview.create_window("{settings.app_name}", html=html, js_api=api, width={settings.app_proportions[0]}, height={settings.app_proportions[1]}, confirm_close={settings.app_confirm_close}, frameless={settings.app_frameless}, fullscreen={settings.app_fullscreen}, resizable={settings.app_resizable})
   window.events.closed += on_closed
   window.events.closing += on_closing

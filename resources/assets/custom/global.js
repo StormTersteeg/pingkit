@@ -5,3 +5,4 @@ var new_site = ""
 var new_site_colour = ""
 var interval = false
 var myInterval = null
+var notifications = false

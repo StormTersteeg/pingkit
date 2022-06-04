@@ -36,6 +36,9 @@ function fetchSites() {
       var average_ping = parseInt(sites[index].ping_data.reduce((t, i) => t + i, 0) / sites[index].ping_data.length)
       if (sites[index].last_size!=site.size) {
         sites[index].changes++
+        if (notifications) {
+          pywebview.api.doNotification(`${new_site.replace('https://','').replace('http://', '').replace('www.', '').split('/')[0]} got updated`)
+        }
       }
       sites[index].last_size = site.size
 
@@ -71,7 +74,7 @@ function addSite() {
   fetchSites()
 
   data.datasets.push({
-    label: new_site.replace('https://','').replace('http://', '').replace('www.', ''),
+    label: new_site.replace('https://','').replace('http://', '').replace('www.', '').split('/')[0],
     data: [],
     borderColor: [new_site_colour],
   })
@@ -109,4 +112,16 @@ function toggleTimer() {
     document.getElementById("timer-button").classList.remove("border-success")
     clearInterval(myInterval)
   }
+}
+
+function toggleNotifications() {
+  notifications = !notifications
+  
+  if (notifications) {
+    document.getElementById("notification-button").innerHTML = '<span class="material-icons">notifications</span>'
+  } else {
+    document.getElementById("notification-button").innerHTML = '<span class="material-icons">notifications_off</span>'
+  }
+
+  pywebview.api.toggleNotifications()
 }

@@ -1,6 +1,6 @@
 # App Settings ====================================================================================================
 app_name = "Glide"                      # App name, displayed in the title bar
-app_proportions = [1200, 675]            # Width, Height
+app_proportions = [1200, 700]            # Width, Height
 app_resizable = True                    # Allow the window to be resized
 app_confirm_close = False               # Quit confirmation dialog prompt
 app_allow_inspect = False               # To open up debugging console, right click on an element and select Inspect.
@@ -24,7 +24,6 @@ resources = [                           # Resources to be included
   "resources/title-bar.html",
 
   "resources/views/main.html",
-  "resources/views/settings.html",
 
   "resources/modals.html",
   "resources/assets/jquery-3.5.1/jquery.slim.min.js",
