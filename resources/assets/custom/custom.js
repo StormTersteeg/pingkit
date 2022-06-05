@@ -37,7 +37,7 @@ function fetchSites() {
       if (sites[index].last_size!=site.size) {
         sites[index].changes++
         if (notifications && sites[index].last_size!=-1) {
-          pywebview.api.doNotification(`${new_site.replace('https://','').replace('http://', '').replace('www.', '').split('/')[0]} got updated`)
+          pywebview.api.doNotification(`${sites[index].url.replace('https://','').replace('http://', '').replace('www.', '').split('/')[0]} got updated`)
         }
       }
       sites[index].last_size = site.size
@@ -71,7 +71,19 @@ function addSite() {
     last_size: -1,
     changes: -1
   })
-  fetchSites()
+
+  document.getElementById("request-list").innerHTML += `
+  <div class="row text-white mb-1">
+    <div class="col-1"><colourblock style="background:${new_site_colour}"></colourblock></div>
+    <div class="col-3 text-truncate">${new_site.replace('https://','').replace('http://', '').replace('www.', '')}</div>
+    <div class="col-1"></div>
+    <div class="col-2"></div>
+    <div class="col-1"></div>
+    <div class="col-1"></div>
+    <div class="col-1">???</div>
+    <div class="col-1"><span class="material-icons pointer text-white-50" onclick="removeSite(this, ${sites.length-1})">highlight_off</span></div>
+  </div>
+`
 
   data.datasets.push({
     label: new_site.replace('https://','').replace('http://', '').replace('www.', '').split('/')[0],
@@ -90,7 +102,7 @@ function removeSite(el, index) {
   el.parentElement.parentElement.remove()
   sites.splice(index, 1)
   data.datasets.splice(index, 1)
-  fetchSites()
+  sizeChart.update()
 }
 
 function timerTick() {
