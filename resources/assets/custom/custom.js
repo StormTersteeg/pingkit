@@ -40,10 +40,12 @@ function fetchSites() {
       var average_ping = parseInt(sites[index].ping_data.reduce((t, i) => t + i, 0) / sites[index].ping_data.length)
       if (sites[index].last_size!=site.size) {
         sites[index].changes++
-        if (notifications && sites[index].last_size!=-1) {
-          pywebview.api.doNotification(`${shortURL(sites[index].url)} size changed (${sites[index].last_size}->${site.size})`)
+        if (sites[index].last_size!=-1) {
+          if (notifications) {
+            pywebview.api.doNotification(`${shortURL(sites[index].url)} size changed (${sites[index].last_size}->${site.size})`)
+          }
+          eventLog(`${shortURL(sites[index].url)} size changed (${sites[index].last_size}->${site.size})`)
         }
-        eventLog(`${shortURL(sites[index].url)} size changed (${sites[index].last_size}->${site.size})`)
       }
       sites[index].last_size = site.size
 
