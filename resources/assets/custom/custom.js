@@ -67,7 +67,7 @@ function addSite() {
     url: new_site,
     colour: new_site_colour,
     ping_data: [],
-    size_data: [],
+    size_data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
     last_size: -1,
     changes: -1
   })
