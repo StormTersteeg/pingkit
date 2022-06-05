@@ -1,4 +1,4 @@
-import webview, os, sys, requests
+import webview, os, sys, requests, threading
 from win10toast import ToastNotifier
 
 def on_closed():
@@ -27,11 +27,19 @@ class Api:
 
     for site in sites:
       headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36'}
-      post = requests.get(site["url"], headers=headers)
 
-      ping = int(post.elapsed.total_seconds()*1000)
-      size = len(post.text)
-      status = post.status_code
+      try:
+        alarm = threading.Timer(3, lambda x: os._exit())
+        alarm.start()
+        request = requests.get(site["url"], headers=headers)
+        alarm.cancel()
+        ping = int(request.elapsed.total_seconds()*1000)
+        size = len(request.text)
+        status = request.status_code
+      except:
+        ping = 3000
+        size = 0
+        status = "timeout"
 
       response.append({
         'ping': ping,
@@ -42,12 +50,12 @@ class Api:
     return response
 
   def doNotification(self, message):
-    toaster.show_toast("pingkit",message,icon_path='')
+    toaster.show_toast("pingkit", message, icon_path='')
 
   def toggleNotifications(self):
     self.notifications = not self.notifications
     message = "on" if (self.notifications) else "off"
-    toaster.show_toast("pingkit",f"notifications: {message}",icon_path='')
+    toaster.show_toast("pingkit", f"notifications: {message}", icon_path='')
 
   def minimize(self):
     window.minimize()
