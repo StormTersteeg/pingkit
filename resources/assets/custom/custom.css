@@ -1,9 +1,23 @@
 html, body { margin:0;padding:0 }
 
+@media (min-width: 992px) {
+  .container {
+    max-width: 1300px;
+  }
+}
+
+.bg-dark-4 {
+  background-color: #2d2b31 !important;
+}
+
+.small-text {
+  font-size: 16px;
+}
+
 .glide-page {
   width: 100%;
   height: calc(100% - 20px);
-  background-color: #000;
+  background-color: #202124;
   overflow-y: auto;
 }
 

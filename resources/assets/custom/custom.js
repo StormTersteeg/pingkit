@@ -15,6 +15,10 @@ function navigate(page) {
   current_page = page
 }
 
+function shortURL(url) {
+  return url.replace('https://','').replace('http://', '').replace('www.', '').split('/')[0]
+}
+
 function updateChart(index) {
   data.datasets[index].data = sites[index].size_data.slice(-60)
 }
@@ -37,7 +41,7 @@ function fetchSites() {
       if (sites[index].last_size!=site.size) {
         sites[index].changes++
         if (notifications && sites[index].last_size!=-1) {
-          pywebview.api.doNotification(`${sites[index].url.replace('https://','').replace('http://', '').replace('www.', '').split('/')[0]} got updated`)
+          pywebview.api.doNotification(`${shortURL(sites[index].url)} got updated`)
         }
       }
       sites[index].last_size = site.size
@@ -45,12 +49,12 @@ function fetchSites() {
       updateChart(index)
 
       document.getElementById("request-list").innerHTML += `
-        <div id="request-${index}" class="row text-white mb-1">
+        <div id="request-${index}" class="row text-white mt-1">
           <div class="col-1"><colourblock style="background:${sites[index].colour}"></colourblock></div>
-          <div class="col-3 text-truncate">${sites[index].url.replace('https://','').replace('http://', '').replace('www.', '')}</div>
+          <div class="col-3 text-truncate">${shortURL(sites[index].url)}</div>
           <div class="col-1">${site.ping}ms</div>
           <div class="col-2">${average_ping}ms</div>
-          <div class="col-1">${sites[index].changes}</div>
+          <div class="col-2">${sites[index].changes}</div>
           <div class="col-1">${site.size}</div>
           <div class="col-1"><span class="text-${status_colour}">${site.status}</div>
           <div class="col-1"><span class="material-icons pointer text-white-50" onclick="removeSite(this, ${index})">highlight_off</span></div>
@@ -73,12 +77,12 @@ function addSite() {
   })
 
   document.getElementById("request-list").innerHTML += `
-  <div class="row text-white mb-1">
+  <div class="row text-white mt-1">
     <div class="col-1"><colourblock style="background:${new_site_colour}"></colourblock></div>
-    <div class="col-3 text-truncate">${new_site.replace('https://','').replace('http://', '').replace('www.', '')}</div>
+    <div class="col-3 text-truncate">${shortURL(new_site)}</div>
     <div class="col-1"></div>
     <div class="col-2"></div>
-    <div class="col-1"></div>
+    <div class="col-2"></div>
     <div class="col-1"></div>
     <div class="col-1">???</div>
     <div class="col-1"><span class="material-icons pointer text-white-50" onclick="removeSite(this, ${sites.length-1})">highlight_off</span></div>
@@ -86,7 +90,7 @@ function addSite() {
 `
 
   data.datasets.push({
-    label: new_site.replace('https://','').replace('http://', '').replace('www.', '').split('/')[0],
+    label: shortURL(new_site),
     data: [],
     borderColor: [new_site_colour],
   })
@@ -96,9 +100,11 @@ function addSite() {
 
   document.getElementById("new-site-input").value = ""
   document.getElementById("new-site-colour-input").value = Math.floor(Math.random()*16777215).toString(16)
+  eventLog(`${shortURL(new_site)} was added`)
 }
 
 function removeSite(el, index) {
+  eventLog(`${sites[index].url} was deleted`)
   el.parentElement.parentElement.remove()
   sites.splice(index, 1)
   data.datasets.splice(index, 1)
@@ -136,4 +142,17 @@ function toggleNotifications() {
   }
 
   pywebview.api.toggleNotifications()
+}
+
+function getTimeNow() {
+  return new Date().toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1")
+}
+
+function eventLog(string) {
+  document.getElementById('event-log').innerHTML = `
+  <div class='row'>
+    <div class='col-12'>
+      <span class='text-white-50 mr-2'>${getTimeNow()}</span><span>${string}</span>
+    </div>
+  </div>` + document.getElementById('event-log').innerHTML
 }

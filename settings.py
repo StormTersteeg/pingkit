@@ -24,6 +24,7 @@ resources = [                           # Resources to be included
   "resources/title-bar.html",
 
   "resources/views/main.html",
+  "resources/views/log.html",
 
   "resources/modals.html",
   "resources/assets/jquery-3.5.1/jquery.slim.min.js",
