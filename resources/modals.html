@@ -6,8 +6,11 @@
         <h5 class="modal-title" id="addSiteModalTitle">Add Site</h5>
       </div>
       <div class="modal-body">
-        <input id="new-site-input" class="form-control border border-info text-white pl-2 mb-3" placeholder="url" type="text" onchange="new_site = this.value">
-        <input id="new-site-colour-input" class="w-100 mb-3" style="background:0;padding:0;border:0;height:75px" type="color" oninput="new_site_colour = this.value">
+        <input id="new-site-input" class="form-control shadow-sm border border-info text-white pl-2 mb-3" placeholder="url" type="text" onchange="new_site = this.value">
+        <div class="d-flex">
+          <input id="new-site-colour-input" class="w-75 mb-3" style="background:0;padding:0;margin:0;border:0;height:75px" type="color" oninput="new_site_colour = this.value">
+          <span class="d-flex justify-content-center align-items-center btn border border-white text-white w-25 ml-3" style="height:75px" onclick="document.getElementById('new-site-colour-input').value = '#' + Math.floor(Math.random()*16777215).toString(16)" data-toggle="tooltip" data-placement="right" title="randomize colour"><span class="material-icons">shuffle</span></span>
+        </div>
         <button onclick="addSite()" type="button" class="btn border border-success text-white w-100">Add</button>
       </div>
     </div>

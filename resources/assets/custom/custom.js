@@ -99,7 +99,6 @@ function addSite() {
   $('#addSiteModal').modal('hide')
 
   document.getElementById("new-site-input").value = ""
-  document.getElementById("new-site-colour-input").value = Math.floor(Math.random()*16777215).toString(16)
   eventLog(`${shortURL(new_site)} was added`)
 }
 
