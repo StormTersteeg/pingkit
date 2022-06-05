@@ -42,8 +42,8 @@ function fetchSites() {
         sites[index].changes++
         if (notifications && sites[index].last_size!=-1) {
           pywebview.api.doNotification(`${shortURL(sites[index].url)} size changed (${sites[index].last_size}->${site.size})`)
-          eventLog(`${sites[index].url} size changed (${sites[index].last_size}->${site.size})`)
         }
+        eventLog(`${shortURL(sites[index].url)} size changed (${sites[index].last_size}->${site.size})`)
       }
       sites[index].last_size = site.size
 
