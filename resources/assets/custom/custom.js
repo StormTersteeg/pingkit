@@ -106,7 +106,7 @@ function addSite() {
 }
 
 function removeSite(el, index) {
-  eventLog(`${sites[index].url} was deleted`)
+  eventLog(`${shortURL(sites[index].url)} was deleted`)
   el.parentElement.parentElement.remove()
   sites.splice(index, 1)
   data.datasets.splice(index, 1)
