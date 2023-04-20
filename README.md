@@ -1,5 +1,6 @@
 # PingKit
-PingKit can keep track of website ping, response size and more. No serverside software required.
+Easily track website uptime or page updates with PingKit.
+PingKit can ping, check response sizes and more. No serverside software required.
 Programmed with [Glide](https://github.com/StormTersteeg/Python-Glide-Framework).
 
 ![image](https://user-images.githubusercontent.com/42808385/172060201-738fb6c5-0f99-4955-ab0f-3c656f21d2d2.png)
